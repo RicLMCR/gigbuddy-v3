@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchEventData } from './components/api/api';
+import { ApiProps } from './types/types';
 import './App.css';
-
-type ApiProps = {
-  id: string;
-  name: string;
-  dates?: any;
-  _embedded?: any;
-  venues: any;
-};
 
 const App = () => {
   const [event, setEvent] = useState([]);
 
   useEffect(() => {
-    fetch(
-      'https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=605&apikey=K9r7IEQ5cw6loi2dujLgMfzyaMb9RIHs'
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setEvent(data._embedded.events);
-        console.log(data._embedded.events);
-      });
+    fetchEventData().then((data) => {
+      setEvent(data._embedded.events);
+      console.log(data._embedded.events);
+    });
   }, []);
 
   return (
