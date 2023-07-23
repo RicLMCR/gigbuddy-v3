@@ -1,7 +1,16 @@
+export interface Venue {
+  id: string;
+  name: string;
+  city: {
+    name: string;
+  };
+}
+
 export interface ApiProps {
   id: string;
   name: string;
-  dates?: any;
-  _embedded?: any;
-  venues: any;
+
+  _embedded: {
+    events: Venue[];
+  };
 }
