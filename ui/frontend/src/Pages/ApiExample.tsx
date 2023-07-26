@@ -1,4 +1,4 @@
-import { Venue } from '../types/types';
+import { Venue } from '../types';
 
 // Destructure the 'event' prop from the arguments
 interface ApiExampleProps {

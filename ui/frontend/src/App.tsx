@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { fetchEventData } from './components/api/api';
-import { Venue } from './types/types';
+//React imports
+import { useEffect, useState } from 'react';
+
+//API fetch imports
+import { fetchEventData } from './api/fetch';
+
+//Type imports
+import { Venue } from './types';
+
+//Page imports
+import ApiExample from './pages/ApiExample';
+
+//Style imports
 import './App.css';
-import ApiExample from './Pages/ApiExample';
 
 const App = () => {
   const [event, setEvent] = useState<Venue[]>([]);

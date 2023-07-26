@@ -1,4 +1,4 @@
-import { ApiProps } from '../../types/types';
+import { ApiProps } from '../types';
 
 //music events in north west of uk
 export const fetchEventData = async (): Promise<ApiProps> => {
