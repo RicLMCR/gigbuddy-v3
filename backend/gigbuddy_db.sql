@@ -55,6 +55,6 @@ alter table gb_attend_event add constraint user_fk
 foreign key (user_id) references gb_users(user_id);
 
 --generate primary key values
-create sequence gb_users increment 1 start 1;
-create sequence gb_event increment 1 start 1;
-create sequence gb_attend_event increment 1 start 1000;
+create sequence gb_users_seq increment 1 start 1;
+create sequence gb_event_seq increment 1 start 1;
+create sequence gb_attend_event_seq increment 1 start 1000;
