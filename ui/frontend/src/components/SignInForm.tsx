@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { Box, TextField } from '@mui/material';
+import { Box, TextField, Button } from '@mui/material';
+import styled from '@emotion/styled';
 
 type SignInFormValues = {
   username: string;
@@ -7,27 +8,30 @@ type SignInFormValues = {
   password: string;
 };
 
-const errorMessages = {
-  color: 'black',
-  fontSize: '15px',
-};
-
 const SignInForm = () => {
-  const { register, handleSubmit, formState } = useForm<SignInFormValues>();
+  const { register, handleSubmit, reset, clearErrors, formState } =
+    useForm<SignInFormValues>();
   const { errors } = formState;
 
-  const onSubmit = (data: SignInFormValues) => console.log(data);
+  const onSubmit = (data: SignInFormValues) => {
+    console.log(data);
+
+    if (!Object.keys(errors).length) {
+      reset({ username: '', email: '', password: '' });
+      clearErrors();
+    }
+  };
 
   return (
     <Box
       sx={{
         backgroundColor: 'white',
-        padding: '10px',
+        paddingBlock: '40px',
+        paddingInline: '80px',
         borderRadius: '7px',
       }}
     >
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        {/* <label htmlFor="username">Username</label> */}
         <TextField
           variant="outlined"
           label="Username"
@@ -44,9 +48,10 @@ const SignInForm = () => {
             },
           })}
         />
-        <p style={errorMessages}>{errors.username?.message}</p>
+        <ErrorContainer>
+          <ErrorMessage>{errors.username?.message}</ErrorMessage>
+        </ErrorContainer>
 
-        {/* <label htmlFor="email">Email</label> */}
         <TextField
           label="email"
           variant="outlined"
@@ -63,9 +68,10 @@ const SignInForm = () => {
             },
           })}
         />
-        <p style={errorMessages}>{errors.email?.message}</p>
+        <ErrorContainer>
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
+        </ErrorContainer>
 
-        {/* <label htmlFor="password">Password</label> */}
         <TextField
           label="password"
           variant="outlined"
@@ -82,11 +88,26 @@ const SignInForm = () => {
             },
           })}
         />
-        <p style={errorMessages}>{errors.password?.message}</p>
-
-        <button>Sign In</button>
+        <ErrorContainer>
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
+        </ErrorContainer>
+        <Button type="submit" variant="contained">
+          Sign In
+        </Button>
       </form>
     </Box>
   );
 };
+
+const ErrorContainer = styled.div`
+  min-height: 40px;
+  margin-bottom: 20px;
+`;
+
+const ErrorMessage = styled.span`
+  color: black;
+  font-size: 12px;
+  margin: 0;
+`;
+
 export default SignInForm;
