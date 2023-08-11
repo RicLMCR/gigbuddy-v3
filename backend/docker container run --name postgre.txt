@@ -1,0 +1,9 @@
+docker container run --name postgresdb -e POSTGRES_PASSWORD=admin -d -p 5432:5432 postgres
+
+// copy source file to container
+docker cp gigbuddy_db.sql postgresdb:/
+
+// run command - open container cli
+docker container exec -it postgresdb bash
+
+psql -U postgres --file gigbuddy_db.sql
