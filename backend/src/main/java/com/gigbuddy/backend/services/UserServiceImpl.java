@@ -1,6 +1,7 @@
 package com.gigbuddy.backend.services;
 
 import com.gigbuddy.backend.exceptions.EtAuthException;
+import com.gigbuddy.backend.respositories.UserRespository;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
