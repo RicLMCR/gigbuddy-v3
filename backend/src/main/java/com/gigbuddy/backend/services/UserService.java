@@ -1,6 +1,7 @@
 package com.gigbuddy.backend.services;
 
 import com.gigbuddy.backend.exceptions.EtAuthException;
+import org.apache.catalina.User;
 
 
 public interface UserService {
