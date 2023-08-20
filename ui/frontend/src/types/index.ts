@@ -14,3 +14,11 @@ export interface ApiProps {
     events: Venue[];
   };
 }
+
+export type SignInFormValues = {
+  username: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+};

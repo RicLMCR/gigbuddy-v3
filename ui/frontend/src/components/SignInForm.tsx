@@ -1,12 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { Box, TextField, Button } from '@mui/material';
-import styled from '@emotion/styled';
-
-type SignInFormValues = {
-  username: string;
-  email: string;
-  password: string;
-};
+import { styled } from '@mui/system';
+import { SignInFormValues } from '../types';
 
 const SignInForm = () => {
   const { register, handleSubmit, reset, clearErrors, formState } =
@@ -17,20 +12,19 @@ const SignInForm = () => {
     console.log(data);
 
     if (!Object.keys(errors).length) {
-      reset({ username: '', email: '', password: '' });
+      reset({
+        username: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+      });
       clearErrors();
     }
   };
 
   return (
-    <Box
-      sx={{
-        backgroundColor: 'white',
-        paddingBlock: '40px',
-        paddingInline: '80px',
-        borderRadius: '7px',
-      }}
-    >
+    <StyledFormContainer>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <TextField
           variant="outlined"
@@ -48,9 +42,41 @@ const SignInForm = () => {
             },
           })}
         />
-        <ErrorContainer>
-          <ErrorMessage>{errors.username?.message}</ErrorMessage>
-        </ErrorContainer>
+        <StyledErrorContainer>
+          <StyledErrorMessage>{errors.username?.message}</StyledErrorMessage>
+        </StyledErrorContainer>
+
+        <TextField
+          variant="outlined"
+          label="First Name"
+          type="text"
+          id="firstname"
+          {...register('firstname', {
+            required: {
+              value: true,
+              message: 'First name is required',
+            },
+          })}
+        />
+        <StyledErrorContainer>
+          <StyledErrorMessage>{errors.firstname?.message}</StyledErrorMessage>
+        </StyledErrorContainer>
+
+        <TextField
+          variant="outlined"
+          label="Last Name"
+          type="text"
+          id="lastname"
+          {...register('lastname', {
+            required: {
+              value: true,
+              message: 'Last name is required',
+            },
+          })}
+        />
+        <StyledErrorContainer>
+          <StyledErrorMessage>{errors.lastname?.message}</StyledErrorMessage>
+        </StyledErrorContainer>
 
         <TextField
           label="email"
@@ -68,9 +94,9 @@ const SignInForm = () => {
             },
           })}
         />
-        <ErrorContainer>
-          <ErrorMessage>{errors.email?.message}</ErrorMessage>
-        </ErrorContainer>
+        <StyledErrorContainer>
+          <StyledErrorMessage>{errors.email?.message}</StyledErrorMessage>
+        </StyledErrorContainer>
 
         <TextField
           label="password"
@@ -88,24 +114,32 @@ const SignInForm = () => {
             },
           })}
         />
-        <ErrorContainer>
-          <ErrorMessage>{errors.password?.message}</ErrorMessage>
-        </ErrorContainer>
+        <StyledErrorContainer>
+          <StyledErrorMessage>{errors.password?.message}</StyledErrorMessage>
+        </StyledErrorContainer>
+
         <Button type="submit" variant="contained">
           Sign In
         </Button>
       </form>
-    </Box>
+    </StyledFormContainer>
   );
 };
 
-const ErrorContainer = styled.div`
+const StyledFormContainer = styled(Box)`
+  background-color: white;
+  padding-block: 40px;
+  padding-inline: 80px;
+  border-radius: 7px;
+`;
+
+const StyledErrorContainer = styled(Box)`
   min-height: 40px;
   margin-bottom: 20px;
 `;
 
-const ErrorMessage = styled.span`
-  color: black;
+const StyledErrorMessage = styled(Box)`
+  color: red;
   font-size: 12px;
   margin: 0;
 `;
