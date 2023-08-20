@@ -7,8 +7,12 @@ import { fetchEventData } from './api/fetch';
 //Type imports
 import { Venue } from './types';
 
+//React Router imports
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 //Page imports
-import ApiExample from './pages/ApiExample';
+import Home from './Pages/Home';
+import ApiExample from './Pages/ApiExample';
 
 //Style imports
 import './App.css';
@@ -24,9 +28,12 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <ApiExample event={event} />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/api-example" element={<ApiExample event={event} />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
